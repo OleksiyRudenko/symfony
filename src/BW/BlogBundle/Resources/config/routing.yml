@@ -1,0 +1,12 @@
+bw_blog_post:
+    resource: "@BWBlogBundle/Resources/config/routing/post.yml"
+    prefix:   /post
+
+bw_blog_homepage:
+    path:     /hello/{name}/{status}
+    defaults: { _controller: BWBlogBundle:Default:index }
+bw_blog_test_redirect:
+    path:   /test_redirect
+    defaults:
+        _controller: BWBlogBundle:Default:testRedirect
+    

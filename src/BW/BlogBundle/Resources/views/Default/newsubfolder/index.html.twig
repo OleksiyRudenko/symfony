@@ -1,0 +1,13 @@
+{% extends 'BWBlogBundle:Skeleton:base.html.twig' %}
+
+{% block title %}My cool blog posts{% endblock %}
+
+{% block menu %}
+    Redefinded sidebar
+    {{ parent() }}
+        <li><a href="/contacts">Contacts</a></li>
+{% endblock %}
+
+{% block body %}
+    Hello <strong>{{ name }}</strong>, {{ surname }}!
+{% endblock %}

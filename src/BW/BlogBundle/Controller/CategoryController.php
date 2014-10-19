@@ -5,65 +5,65 @@ namespace BW\BlogBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use BW\BlogBundle\Entity\Post;
-use BW\BlogBundle\Form\PostType;
+use BW\BlogBundle\Entity\Category;
+use BW\BlogBundle\Form\CategoryType;
 
 /**
- * Post controller.
+ * Category controller.
  *
  */
-class PostController extends Controller
+class CategoryController extends Controller
 {
 
     /**
-     * Lists all Post entities.
+     * Lists all Category entities.
      *
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('BWBlogBundle:Post')->findAll();
+        $entities = $em->getRepository('BWBlogBundle:Category')->findAll();
 
-        return $this->render('BWBlogBundle:Post:index.html.twig', array(
+        return $this->render('BWBlogBundle:Category:index.html.twig', array(
             'entities' => $entities,
         ));
     }
     /**
-     * Creates a new Post entity.
+     * Creates a new Category entity.
      *
      */
     public function createAction(Request $request)
     {
-        $entity = new Post();
+        $entity = new Category();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($entity); // Alex-FA: keep data
-            $em->flush(); // Alex-FA: save data
+            $em->persist($entity);
+            $em->flush();
 
-            return $this->redirect($this->generateUrl('post_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('category_show', array('id' => $entity->getId())));
         }
 
-        return $this->render('BWBlogBundle:Post:new.html.twig', array(
+        return $this->render('BWBlogBundle:Category:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
     }
 
     /**
-     * Creates a form to create a Post entity.
+     * Creates a form to create a Category entity.
      *
-     * @param Post $entity The entity
+     * @param Category $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Post $entity)
+    private function createCreateForm(Category $entity)
     {
-        $form = $this->createForm(new PostType(), $entity, array(
-            'action' => $this->generateUrl('post_create'),
+        $form = $this->createForm(new CategoryType(), $entity, array(
+            'action' => $this->generateUrl('category_create'),
             'method' => 'POST',
         ));
 
@@ -73,60 +73,60 @@ class PostController extends Controller
     }
 
     /**
-     * Displays a form to create a new Post entity.
+     * Displays a form to create a new Category entity.
      *
      */
     public function newAction()
     {
-        $entity = new Post();
+        $entity = new Category();
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('BWBlogBundle:Post:new.html.twig', array(
+        return $this->render('BWBlogBundle:Category:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
     }
 
     /**
-     * Finds and displays a Post entity.
+     * Finds and displays a Category entity.
      *
      */
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('BWBlogBundle:Post')->find($id);
+        $entity = $em->getRepository('BWBlogBundle:Category')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Post entity.');
+            throw $this->createNotFoundException('Unable to find Category entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('BWBlogBundle:Post:show.html.twig', array(
+        return $this->render('BWBlogBundle:Category:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-     * Displays a form to edit an existing Post entity.
+     * Displays a form to edit an existing Category entity.
      *
      */
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('BWBlogBundle:Post')->find($id);
+        $entity = $em->getRepository('BWBlogBundle:Category')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Post entity.');
+            throw $this->createNotFoundException('Unable to find Category entity.');
         }
 
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('BWBlogBundle:Post:edit.html.twig', array(
+        return $this->render('BWBlogBundle:Category:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -134,35 +134,35 @@ class PostController extends Controller
     }
 
     /**
-    * Creates a form to edit a Post entity.
+    * Creates a form to edit a Category entity.
     *
-    * @param Post $entity The entity
+    * @param Category $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Post $entity)
+    private function createEditForm(Category $entity)
     {
-        $form = $this->createForm(new PostType(), $entity, array(
-            'action' => $this->generateUrl('post_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new CategoryType(), $entity, array(
+            'action' => $this->generateUrl('category_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update', 'attr'=> [ 'class'=>'btn btn-danger'] ));
+        $form->add('submit', 'submit', array('label' => 'Update'));
 
         return $form;
     }
     /**
-     * Edits an existing Post entity.
+     * Edits an existing Category entity.
      *
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('BWBlogBundle:Post')->find($id);
+        $entity = $em->getRepository('BWBlogBundle:Category')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Post entity.');
+            throw $this->createNotFoundException('Unable to find Category entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -172,17 +172,17 @@ class PostController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('post_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('category_edit', array('id' => $id)));
         }
 
-        return $this->render('BWBlogBundle:Post:edit.html.twig', array(
+        return $this->render('BWBlogBundle:Category:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
     /**
-     * Deletes a Post entity.
+     * Deletes a Category entity.
      *
      */
     public function deleteAction(Request $request, $id)
@@ -192,21 +192,21 @@ class PostController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('BWBlogBundle:Post')->find($id);
+            $entity = $em->getRepository('BWBlogBundle:Category')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Post entity.');
+                throw $this->createNotFoundException('Unable to find Category entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('post'));
+        return $this->redirect($this->generateUrl('category'));
     }
 
     /**
-     * Creates a form to delete a Post entity by id.
+     * Creates a form to delete a Category entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -215,7 +215,7 @@ class PostController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('post_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('category_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

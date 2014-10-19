@@ -32,7 +32,8 @@ security:
 
         # secures part of the application
         demo_secured_area:
-            pattern:    ^/demo/secured/
+            # pattern:    ^/demo/secured/
+            pattern:    ^/
             # it's important to notice that in this case _demo_security_check and _demo_login
             # are route names and that they are specified in the AcmeDemoBundle
             form_login:
@@ -49,4 +50,5 @@ security:
     # of your application based on roles, ip, host or methods
     # http://symfony.com/doc/current/book/security.html#security-book-access-control-matching-options
     access_control:
-        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        # - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        - { path: ^/post, roles: ROLE_ADMIN }

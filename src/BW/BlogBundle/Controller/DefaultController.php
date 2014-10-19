@@ -7,12 +7,15 @@ use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
-    public function indexAction($name,$status)
+    public function indexAction($name="dflt name",$status="dflt status")
     {
         return $this->render('BWBlogBundle:Default/newsubfolder:index.html.twig', 
                 array(
                     'name' => $name, 
                     'surname' => $status,
+                    'array'   => [
+                        'one'   => 'ONE',
+                    ]
                     ));
 //        $response = new \Symfony\Component\HttpFoundation\Response('<head></head><body><h1>custom content</h1></body>',404);
        // $response = new Response('<head></head><body><h1>custom content</h1></body>',404);

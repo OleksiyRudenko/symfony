@@ -6,19 +6,24 @@
         <title>{% block title %}Test Application{% endblock %}</title>
     </head>
     <body>
-        <div id="sidebar">
-            {% block sidebar %}
-                <ul>
-                    {% block menu %}
-                      <li><a href="/">Home</a></li>
-                      <li><a href="/blog">Blog</a></li>
-                    {% endblock %}
-                </ul>
-            {% endblock %}
-        </div>
+        {% block body %}
+            <div id="sidebar">
+                {% block sidebar %}
+                    <ul>
+                        {% block menu %}
+                          {# <li><a href="{{ path('_welcome') }}">Home</a></li> {# replaced "/" which is dflt #}
+                          <li><a href="{{ path('index') }}">Home</a></li> {# replaced "/" which is dflt #}
+                          <li><a href="{{ url('post') }}">Blog</a></li> {# url() returns full url #}
+                          <li><a href="{{ url('category') }}">Blog Categories</a></li> {# url() returns full url #}
+                        {% endblock %}
+                    </ul>
+                {% endblock %}
+            </div>
 
-        <div id="content">
-            {% block body %}{% endblock %}
-        </div>
+            <div id="content">
+                {% block content %}
+                {% endblock %}
+            </div>
+        {% endblock %}
     </body>
 </html>

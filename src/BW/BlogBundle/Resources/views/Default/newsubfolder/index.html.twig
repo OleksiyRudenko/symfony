@@ -8,6 +8,14 @@
         <li><a href="/contacts">Contacts</a></li>
 {% endblock %}
 
-{% block body %}
+{% block content %}
+    {{ app.request.query.get('page',"noGET") }} {# __GET: can do the same within Controller #}
+    {{ app.request.request.get('page',"noPOST") }} {# __POST: can do the same within Controller #}
+    {{ app.request.server.get('HTTP_HOST',"noSERVERdata") }} {# __SERVER: can do the same within Controller #}
+    {{ app.request.getHost() }} {# __SERVER: can do the same within Controller #}
+    {{ app.request.host() }} {# auto method #}
+    {{ app.request.host }} {# auto method #}
+    {{ array['one'] }} {# see DefaultController #}
+    {{ array.one }} {# equiv to the above #}
     Hello <strong>{{ name }}</strong>, {{ surname }}!
 {% endblock %}

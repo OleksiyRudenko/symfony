@@ -47,6 +47,8 @@
             Edit
         </a>
     </li>
-    <li>{{ form(delete_form) }}</li>
+    {% if is_granted('ROLE_ADMIN') %}  {# requires firewall enabled #}
+        <li>{{ form(delete_form) }}</li>
+    {% endif %}
 </ul>
 {% endblock %}

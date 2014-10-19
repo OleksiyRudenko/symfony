@@ -16,6 +16,13 @@ class PostType extends AbstractType
     {
         $builder
             ->add('heading')
+            ->add('category', 'entity', [
+                'class' =>  'BW\BlogBundle\Entity\Category',
+                'property'  =>  'heading',
+                'required'  => false,
+                'empty_value'   =>  '< No ctaegory >',
+                'expanded'  => true,
+            ])
             ->add('description')
             ->add('published', 'checkbox', [
                 'label' => 'Опубликовано',
